@@ -1,6 +1,7 @@
 package com.lilcodeur.automobile.controllers;
 
 import com.lilcodeur.automobile.modeles.Clients;
+import com.lilcodeur.automobile.modeles.NomPrenom;
 import com.lilcodeur.automobile.services.ClientsServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,15 @@ public class ClientsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void modifierInfoClients(@PathVariable int id,@RequestBody Clients clients){
         this.clientsServices.modifierInfoClients(id,clients);
+    }
+    //juste un teste
+    @PostMapping(value = "testClient")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addClientsTest(@RequestBody Clients clients){
+        this.clientsServices.testClient(clients);
+    }
+    @GetMapping(value = "nom/prenom",produces = APPLICATION_JSON_VALUE)
+    public List<NomPrenom> getNomPrenomClients(){
+        return this.clientsServices.getNomPrenomClients();
     }
 }

@@ -1,11 +1,11 @@
 package com.lilcodeur.automobile.services;
 
 import com.lilcodeur.automobile.modeles.Clients;
+import com.lilcodeur.automobile.modeles.NomPrenom;
 import com.lilcodeur.automobile.repositorys.ClientsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -45,5 +45,15 @@ public class ClientsServices {
         }else {
             System.out.println("non");
         }
+    }
+    public void testClient(Clients clients){
+        Clients clientBd = this.clientsRepository.findByEmail(clients.getEmail());
+        if(clientBd==null){
+            this.clientsRepository.createClient(clients.getNom(),clients.getPrenom(),clients.getEmail(),clients.getMdp());
+        }
+    }
+    //recuperer le nom et le prenom d'un utilisateur
+    public List<NomPrenom> getNomPrenomClients(){
+        return this.clientsRepository.findNomAndPrenom();
     }
 }
