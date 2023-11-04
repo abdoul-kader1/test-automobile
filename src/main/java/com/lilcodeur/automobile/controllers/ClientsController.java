@@ -1,13 +1,16 @@
 package com.lilcodeur.automobile.controllers;
 
+import com.lilcodeur.automobile.DTO.ErreurRequets;
 import com.lilcodeur.automobile.modeles.Clients;
 import com.lilcodeur.automobile.modeles.NomPrenom;
 import com.lilcodeur.automobile.services.ClientsServices;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController

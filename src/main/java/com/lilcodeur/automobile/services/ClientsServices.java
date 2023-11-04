@@ -3,6 +3,7 @@ package com.lilcodeur.automobile.services;
 import com.lilcodeur.automobile.modeles.Clients;
 import com.lilcodeur.automobile.modeles.NomPrenom;
 import com.lilcodeur.automobile.repositorys.ClientsRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public class ClientsServices {
         Clients clientBd = this.clientsRepository.findByEmail(clients.getEmail());
         if(clientBd == null){
             this.clientsRepository.save(clients);
+        }else{
+            throw new EntityNotFoundException("l'email existe deja");
         }
     }
     public List<Clients> recupListClients(){
@@ -27,7 +30,9 @@ public class ClientsServices {
     }
     public Clients unClient(int id){
         Optional<Clients>optionalClients = this.clientsRepository.findById(id);
-        return optionalClients.orElse(null);
+        return optionalClients.orElseThrow(
+                ()-> new EntityNotFoundException("ce client n'existe pas")
+        );
     }
     public Clients lireOuCree(Clients clientsAcree){
         Clients clientBd = this.clientsRepository.findByEmail(clientsAcree.getEmail());

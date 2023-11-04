@@ -1,6 +1,7 @@
 package com.lilcodeur.automobile.controllers;
 
 import com.lilcodeur.automobile.modeles.Voitures;
+import com.lilcodeur.automobile.modeles.VoituresNative;
 import com.lilcodeur.automobile.services.VoituresServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +41,15 @@ public class VoitureController {
     public List<Voitures>voituresClient(@PathVariable int id){
         return this.voituresServices.voituresClients(id);
     }
-
+    // ajouter une voiture dans la base de donnee (native)
+    @PostMapping("ajout/native")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void ajouterVoitureNative(@RequestBody VoituresNative voitures){
+        this.voituresServices.ajouterVoitureNative(voitures);
+    }
+    //modifier la marque et le modele d'une voitures
+    @PutMapping(path = "modifier/native/{id}")
+    public void modifierModeleMarque(@PathVariable int id,@RequestBody VoituresNative voituresNative){
+        this.voituresServices.modifierModeleMarque(id,voituresNative);
+    }
 }
