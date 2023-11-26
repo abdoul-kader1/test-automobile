@@ -2,11 +2,13 @@ package com.lilcodeur.automobile.services;
 
 import com.lilcodeur.automobile.modeles.Clients;
 import com.lilcodeur.automobile.modeles.NomPrenom;
+import com.lilcodeur.automobile.modeles.SeConnecter;
 import com.lilcodeur.automobile.repositorys.ClientsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -15,6 +17,19 @@ public class ClientsServices {
 
     public ClientsServices(ClientsRepository clientsRepository) {
         this.clientsRepository = clientsRepository;
+    }
+
+    public Clients seConnecter(SeConnecter connecter){
+        Clients clientsBd = this.clientsRepository.findByEmail(connecter.getEmail());
+        if(clientsBd!=null){
+            if(Objects.equals(connecter.getMdp(), clientsBd.getMdp())){
+                return clientsBd;
+            }else{
+                throw new EntityNotFoundException("le mot de passe est incorrecte");
+            }
+        }else{
+            throw new EntityNotFoundException("l'adresse email est incorrecte");
+        }
     }
 
     public void ajouterClients(Clients clients){

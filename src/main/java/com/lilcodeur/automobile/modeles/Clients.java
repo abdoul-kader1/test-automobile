@@ -1,5 +1,4 @@
 package com.lilcodeur.automobile.modeles;
-
 import jakarta.persistence.*;
 
 @Entity()
