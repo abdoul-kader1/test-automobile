@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 @Log
 public class AutomobileApplication implements CommandLineRunner {
@@ -13,6 +14,6 @@ public class AutomobileApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		//log.info("Le resultat de l'operation est : ");
+		
 	}
 }
